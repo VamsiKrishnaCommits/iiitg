@@ -26,7 +26,7 @@ open the link   http://localhost/iiitg/auth.php
  Login as admin with username- admin    password- iiitg@123
 
  Admin can add accounts manually in phpmyadmin , in the authentication table, which is under studentinfo data base.
-The passwords are SHA1 hashed.
+The passwords are SHA1 hashed. 
 
 B)The table definitions
 
@@ -42,7 +42,14 @@ There are 3 types of consoles
 Admin has all the privileges , admin can upload bank records , mess dues etc.
 Staff has restricted priviliges.
 Student has a tab to register.
- 
+
+Admin can add accounts manually in phpmyadmin , in the authentication table, which is under studentinfo data base.
+Admin can assign the roles with the names
+1)admin
+2)staff
+3)student
+All of them are case sensitive and should be places in the role column of table authentication.
+
 On logging in everything becomes apparent.
 
 D) Upload features
