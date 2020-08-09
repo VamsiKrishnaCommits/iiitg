@@ -19,7 +19,9 @@ if (in_array($_FILES["file"]["type"],$allowedFileType)) {
     move_uploaded_file($_FILES['file']['tmp_name'], $targetPath);
     $Reader = new SpreadsheetReader($targetPath);
 	foreach ($Reader as $Row)
-	{
+	{ 
+    $count=0;
+    if(isset($Row[0])){
 $sql = "INSERT INTO fee_and_fine( Date,RollNumber,TutionFee, HostelRent,MessAdvance,MessDues,Fines,CautionMoney)
 VALUES (".$Row[0]. ", ".$Row[1].", ".$Row[2].", ".$Row[3].", ".$Row[4].", ".$Row[5].", ".$Row[6].", ".$Row[7].")";
 $roll=$Row[1];
@@ -28,23 +30,25 @@ $roll=$Row[1];
   $find=$Row[6];
   $md=$Row[4]+$Row[5];
   $sql1 = "UPDATE studentdues SET MessDues=MessDues-$md,FeesDues=FeesDues-$fd,FinesDues=FinesDues-$find WHERE RollNumber= $roll";
-if(mysqli_query($connect, $sql1)) {
-} else {
-}
-    } 
-    else {
-    }
- 
-  }
+    
   if(mysqli_query($connect, $sql1)) {
-    echo "Records updated successfully";
   } else {
+    $count++;
     echo "Somethings wrong with the format you uploaded";
+    exit();
   }
-   }
+
+}
+   
+  }}
+  if($count==0)
+ echo "Records are updated successfully";
+  
+}
    else{
 
     echo "Something is wrong with the format you uploaded";
+
 
    }
   
